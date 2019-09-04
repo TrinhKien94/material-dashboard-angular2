@@ -24,6 +24,7 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HotNewsSideComponent } from './hot-news-side/hot-news-side.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import { HotNewsSideComponent } from './hot-news-side/hot-news-side.component';
         HttpClientModule,
         ComponentsModule,
         RouterModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
         AgmCoreModule.forRoot({
             apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
