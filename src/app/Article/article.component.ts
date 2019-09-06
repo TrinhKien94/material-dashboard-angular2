@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ArticleDto} from '../dto/article-dto';
 import {HttpClientService} from '../service/httpclient.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Meta} from '@angular/platform-browser';
-import { Title } from '@angular/platform-browser';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article',
@@ -11,28 +10,31 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-
   article: ArticleDto;
-  //
-  //
-  // constructor(private httpClientService: HttpClientService, private route: ActivatedRoute, private router: Router) {
-  // }
-  constructor(private titleService: Title, private httpClientService: HttpClientService, private route: ActivatedRoute, private router: Router, private meta: Meta) {
-    route.params.subscribe(val => {
-      const id = this.route.params['value'].id;
-      this.httpClientService.getArticleById(id).subscribe(
-          (response) => {
-            console.log(response);
-            this.handleSuccessfulResponse(response);
-          });
-    });
+
+  constructor(
+      private httpClientService: HttpClientService,
+      private title: Title,
+      private route: ActivatedRoute,
+      private router: Router,
+      private meta: Meta) {
   }
 
   ngOnInit() {
-    const id = this.route.params['value'].id;
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.router.navigated = false;
+        window.scrollTo(0, 0);
+      }
+    });
+    const id = this.route.params['value'].url;
     this.httpClientService.getArticleById(id).subscribe(
         (response) => {
-          console.log(response);
+          this.setMetaData(response);
           this.handleSuccessfulResponse(response);
         });
   }
@@ -41,20 +43,15 @@ export class ArticleComponent implements OnInit {
     this.article = response;
     const re = /<img/gi;
     this.article.content = this.article.content.replace(re, '<img class="img-fluid"');
-    this.setTitle(this.article.title);
-    this.createMetaTag();
   }
 
-  public setTitle( newTitle: string) {
-    this.titleService.setTitle( newTitle );
-  }
-  createMetaTag() {
-    // const meta = document.createElement('meta');
-    // meta.setAttribute('property','og:image'); //this line is the issue
-    // meta.content = '' + this.article.image;
-    // document.getElementsByTagName('head')[0].appendChild(meta);
-    this.meta.updateTag({name: 'description', content: this.article.title});
-    this.meta.updateTag({name: 'og:image', content: this.article.image});
-    this.meta.updateTag({property: 'og:image', content: this.article.image});
+  setMetaData(data) {
+    this.title.setTitle(data.title);
+    this.meta.updateTag({'name': 'description', 'content': data.title});
+    this.meta.updateTag({'property': 'og:title', 'content': data.title});
+    this.meta.updateTag({'property': 'og:url', 'content': 'https://vietnam-trader.com/articles/' + data.url});
+    this.meta.updateTag({'property': 'og:image', 'content': data.image});
+    this.meta.updateTag({'property': 'og:image:alt', 'content': data.title});
+    this.meta.updateTag({'property': 'og:description', 'content': data.title});
   }
 }
