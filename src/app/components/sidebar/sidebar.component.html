@@ -73,7 +73,8 @@
                         <p>{{submenuItem.title}}</p>
                     </a>
                     <a *ngIf="submenuItem.subMenu.length === 0" class="nav-link"
-                       [routerLink]="['/category-inside',submenuItem.path]">
+                       [routerLink]="[submenuItem.path]">
+<!--                       [routerLink]="['/category-inside',submenuItem.path]">-->
                         <p>{{submenuItem.title}}</p>
                     </a>
                 </li>
