@@ -26,6 +26,7 @@ import { ArticleItemComponent } from 'app/article-item/article-item.component';
 import {CurrentPricingComponent} from '../../current-pricing/current-pricing.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HotNewsSideComponent } from 'app/hot-news-side/hot-news-side.component';
+import {SafeHtmlPipe} from '../../service/safe.html.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +62,7 @@ import { HotNewsSideComponent } from 'app/hot-news-side/hot-news-side.component'
     ArticleCategoryInsideComponent,
     ArticleItemComponent,
     CurrentPricingComponent,
+    SafeHtmlPipe,
   ]
 })
 

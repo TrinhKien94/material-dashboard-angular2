@@ -34,7 +34,7 @@ export class ArticleCategoryInsideComponent implements OnInit {
   }
 
   pageChanged(event) {
-    this.httpClientService.getArticles(event - 1, 10, undefined, undefined).subscribe(
+    this.httpClientService.getArticles(event - 1, 10, this.categoryId, undefined).subscribe(
         (response) => {
           this.handleSuccessfulResponse(response);
           this.scrollTop();
