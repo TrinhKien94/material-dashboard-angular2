@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {UserDTO} from '../dto/user-dto';
 import { ArticleDto } from 'app/dto/article-dto';
 import { ArticlePaging } from 'app/dto/paging';
+import { Sitemap } from 'app/dto/sitemap';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class HttpClientService {
   ) {
   }
 
+  
   getArticles(page: number, size:number, categoryId: number, hot: boolean) {
     let url = environment.apiUrl + 'articles?page=' + page + '&size=' + size;
     if (hot != undefined) {
@@ -24,6 +26,10 @@ export class HttpClientService {
       url = url + '&categoryId=' + categoryId;
     }
     return this.httpClient.get<ArticlePaging[]>(url);
+  }
+
+  getSitemap() {
+    return this.httpClient.get<Sitemap>(environment.apiUrl + '/sitemap');
   }
 
   getArticleById(id) {

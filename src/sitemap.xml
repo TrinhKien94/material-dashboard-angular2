@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?><urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url><loc>https://vietnam-trader.com/</loc><priority>1.0</priority></url>
+    <url><loc>https://vietnam-trader.com/sitemap</loc><priority>1.0</priority></url>
+    <url><loc>https://vietnam-trader.com/</loc><priority>0.99</priority></url>
     <url><loc>https://vietnam-trader.com/category-inside/10</loc><priority>0.8</priority></url>
     <url><loc>https://vietnam-trader.com/category-inside/11</loc><priority>0.8</priority></url>
     <url><loc>https://vietnam-trader.com/category-inside/12</loc><priority>0.8</priority></url>

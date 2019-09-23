@@ -24,6 +24,7 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HotNewsSideComponent } from './hot-news-side/hot-news-side.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import { HotNewsSideComponent } from './hot-news-side/hot-news-side.component';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
+        SitemapComponent,
     ],
     providers: [],
     bootstrap: [AppComponent]

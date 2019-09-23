@@ -3,12 +3,17 @@ import {CommonModule, LocationStrategy, PathLocationStrategy,} from '@angular/co
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/',
     pathMatch: 'full',
+  },
+  {
+    path: 'sitemap',
+    component: SitemapComponent
   }, {
     path: '',
     component: AdminLayoutComponent,
