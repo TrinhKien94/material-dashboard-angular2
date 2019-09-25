@@ -46,20 +46,22 @@ export class ArticleComponent implements OnInit {
   }
 
   setMetaData(data) {
-    let tags = data.tags.split(',');
-    this.meta.removeTag("property='article:tag'");
+    const tags = data.tags.split(',');
+    this.meta.removeTag('property=\'article:tag\'');
     tags.forEach(tag => {
       this.meta.addTag({'property': 'article:tag', 'content': tag});
     });
     this.title.setTitle(data.title);
-    this.meta.updateTag({'name': 'description', 'content': data.title});
+    let description = data.description;
+    if (description === undefined) {
+      description = data.title;
+    }
+    this.meta.updateTag({'name': 'description', 'content': description});
     this.meta.updateTag({'property': 'og:title', 'content': data.title});
     this.meta.updateTag({'property': 'og:url', 'content': 'https://vietnam-trader.com/articles/' + data.url});
     this.meta.updateTag({'property': 'og:image', 'content': data.image});
     this.meta.updateTag({'property': 'og:image:alt', 'content': data.title});
-    this.meta.updateTag({'property': 'og:description', 'content': data.title});
-    this.meta.updateTag({'property': 'og:description', 'content': data.title});
+    this.meta.updateTag({'property': 'og:description', 'content': description});
     this.meta.updateTag({'property': 'article:tag', 'content': data.title});
-    
   }
 }
